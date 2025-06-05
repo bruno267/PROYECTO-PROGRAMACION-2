@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="CONTROLLER.TarjetaProductoController"
+            xmlns:fx="http://javafx.com/fxml" prefWidth="200" prefHeight="250" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);">
+    
+    <VBox alignment="CENTER" spacing="8" layoutX="10" layoutY="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <ImageView fx:id="imgProducto" fitWidth="100" fitHeight="100" />
+        <Label fx:id="lblNombre" style="-fx-font-weight: bold;" wrapText="true"/>
+        <Label fx:id="lblPrecio" style="-fx-text-fill: gray;" />
+        
+        <HBox spacing="10" alignment="CENTER">
+            <Label fx:id="lblRating" text="★ 4.9" />
+            <Button fx:id="btnCarrito" text="🛒" onAction="#agregarCarrito" />
+            <Button fx:id="btnFavorito" text="☆" onAction="#agregarFavorito" />
+        </HBox>
+    </VBox>
+</AnchorPane>

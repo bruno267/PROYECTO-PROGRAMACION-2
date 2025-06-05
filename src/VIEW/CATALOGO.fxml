@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="CONTROLLER.CATALOGOController"
+            prefWidth="900" prefHeight="600">
+
+    <!-- Barra superior -->
+    <top>
+        <HBox spacing="20" padding="10" style="-fx-background-color: #000000;" alignment="CENTER_LEFT">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@../IMAGENES/LOGO2.png"/>
+                </image>
+            </ImageView>
+            <Label text="JSHOP" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/> <!-- empuja los botones a la derecha -->
+
+            <!-- Botones funcionales -->
+            <Button text="Favoritos" onAction="#verFavoritos"/>
+            <Button text="Carrito" onAction="#verCarrito"/>
+            <Button text="Mi cuenta" onAction="#verUsuario"/>
+            <Button text="Cerrar sesión" onAction="#cerrarSesion"/>
+        </HBox>
+    </top>
+
+    <!-- Panel de tarjetas -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #f4f4f4;">
+            <FlowPane fx:id="contenedorProductos"
+                      hgap="20" vgap="20" padding="20"
+                      prefWrapLength="800"
+                      style="-fx-background-color: #f4f4f4;" />
+        </ScrollPane>
+    </center>
+</BorderPane>
