@@ -27,28 +27,25 @@ public class TarjetaProductoController {
     @FXML
     private Button btnFavorito;
 
-    private String idProducto; 
-  
-  public void setProducto(PRODUCTO producto) {
-    this.idProducto = producto.getId();
-    lblNombre.setText(producto.getNombre());
-    lblPrecio.setText(producto.getPrecioFormateado());
-    lblRating.setText(producto.getRatingFormateado());
-    imgProducto.setImage(producto.getImagen());
-}
+    private String idProducto;
 
+    public void setProducto(PRODUCTO producto) {
+        this.idProducto = producto.getId();
+        lblNombre.setText(producto.getNombre());
+        lblPrecio.setText(producto.getPrecioFormateado());
+        lblRating.setText(producto.getRatingFormateado());
+        imgProducto.setImage(producto.getImagen());
+    }
 
     @FXML
     private void agregarCarrito() {
-        System.out.println("Agregado al carrito: " + lblNombre.getText());
-        // Aquí puedes llamar a tu lógica de carrito, por ejemplo:
-        // Carrito.agregar(idProducto);
+        System.out.println("🛒 Producto agregado al carrito: " + lblNombre.getText());
+        // Aquí puedes agregar lógica real: Carrito.agregar(producto);
     }
 
     @FXML
     private void agregarFavorito() {
-        System.out.println("Agregado a favoritos: " + lblNombre.getText());
-        // Aquí puedes llamar a tu lógica de favoritos
-        // Favoritos.agregar(idProducto);
+        System.out.println("★ Producto agregado a favoritos: " + lblNombre.getText());
+        // Aquí puedes agregar lógica real: Favoritos.agregar(producto);
     }
 }

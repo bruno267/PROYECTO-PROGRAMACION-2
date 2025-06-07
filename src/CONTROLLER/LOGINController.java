@@ -46,23 +46,23 @@ public class LOGINController implements Initializable {
       
     }
 
-    @FXML
-    private void handleIngresar() {
-        String usuario = txtUsuario.getText();
-        String contrasena = txtContrasena.getText();
+@FXML
+private void handleIngresar() {
+    String usuario = txtUsuario.getText();
+    String contrasena = txtContrasena.getText();
 
-        boolean credencialesValidas = false;
-        for (USUARIO user : usuariosRegistrados) {
-            if (user.validar(usuario, contrasena)) { 
-                credencialesValidas = true;
-                break;
-            }
+    boolean credencialesValidas = false;
+    for (USUARIO user : usuariosRegistrados) {
+        if (user.validar(usuario, contrasena)) {
+            credencialesValidas = true;
+            break;
         }
+    }
 
         if (credencialesValidas) {
             lblerror.setVisible(false);
             mostrarAlerta("Éxito", "Inicio de sesión exitoso", Alert.AlertType.INFORMATION);
-          
+            
         } else {
             lblerror.setVisible(true);
             txtUsuario.clear();
