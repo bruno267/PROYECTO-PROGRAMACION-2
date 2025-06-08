@@ -14,7 +14,7 @@
         
         <HBox spacing="10" alignment="CENTER">
             <Label fx:id="lblRating" text="★ 4.9" />
-            <Button fx:id="btnCarrito" text="🛒" onAction="#agregarCarrito" />
+          <Button fx:id="btnAgregarCarrito" text="🛒" onAction="#agregarAlCarrito"/>
             <Button fx:id="btnFavorito" text="☆" onAction="#agregarFavorito" />
         </HBox>
     </VBox>

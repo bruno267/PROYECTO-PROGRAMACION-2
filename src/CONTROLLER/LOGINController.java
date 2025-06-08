@@ -1,5 +1,5 @@
 package CONTROLLER;
-
+import MODEL.Navegacion;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,32 +60,10 @@ public class LOGINController implements Initializable {
         if (credencialesValidas) {
             lblerror.setVisible(false);
 
-            try {
-                // Cargar la ventana del catálogo
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/CATALOGO.fxml"));
-                Parent root = loader.load();
-
-                // Obtener el escenario actual (login)
-                Stage loginStage = (Stage) txtUsuario.getScene().getWindow();
-
-                // Crear y configurar la nueva ventana (catálogo)
-                Stage catalogoStage = new Stage();
-                catalogoStage.setTitle("JSHOP - Catálogo de Productos");
-                catalogoStage.setScene(new Scene(root));
-
-                // Configurar para que se muestre maximizada
-                catalogoStage.setMaximized(true); // Esta línea hace la magia
-
-                // Cerrar la ventana de login
-                loginStage.close();
-
-                // Mostrar el catálogo
-                catalogoStage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                mostrarAlerta("Error", "No se pudo cargar el catálogo", Alert.AlertType.ERROR);
-            }
+            {
+                     Stage stage = (Stage) txtUsuario.getScene().getWindow();
+        Navegacion.cambiarVista("/VIEW/CATALOGO.fxml", "JSHOP - Catálogo de Productos", stage);
+    }
 
         } else {
             lblerror.setVisible(true);
@@ -97,36 +75,19 @@ public class LOGINController implements Initializable {
     @FXML
     private void irACrearCuenta() {
 
-        try {
+       
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/CREARUSUARIO.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Crear Nueva Cuenta");
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL); // Hace que la ventana de login se bloquee hasta cerrar registro
-            stage.showAndWait(); // Espera a que se cierre la ventana de registro
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error al cargar la ventana", "No se pudo cargar la ventana de creación de usuario. Verifique la ruta del FXML y la existencia del archivo. Detalle: " + e.getMessage(), Alert.AlertType.ERROR);
-        } catch (Exception e) {
-            e.printStackTrace();
-            mostrarAlerta("Error inesperado", "Ocurrió un error inesperado: " + e.getMessage(), Alert.AlertType.ERROR);
-        }
+     
+        Stage stage = (Stage) txtUsuario.getScene().getWindow();
+        Navegacion.cambiarVista("/VIEW/REGISTRO.fxml", "JSHOP - Crear Cuenta", stage);
     }
+
+    
 
     // Mé
     public static void agregarUsuario(USUARIO nuevoUsuario) {
         usuariosRegistrados.add(nuevoUsuario);
     }
 
-    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
-        Alert alerta = new Alert(tipo);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
+ 
 }

@@ -1,51 +1,71 @@
 package CONTROLLER;
 
 import MODELO.PRODUCTO;
+import MODELO.Carrito; 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
+import javafx.scene.control.Alert;
 
 public class TarjetaProductoController {
 
     @FXML
     private ImageView imgProducto;
-
     @FXML
     private Label lblNombre;
-
     @FXML
     private Label lblPrecio;
-
     @FXML
     private Label lblRating;
+    @FXML
+    private Button btnAgregarCarrito; 
+    private PRODUCTO producto;
+    private Carrito carrito; 
+    private CATALOGOController catalogoController; 
 
     @FXML
-    private Button btnCarrito;
-
-    @FXML
-    private Button btnFavorito;
-
-    private String idProducto;
+    public void initialize() {
+        carrito = Carrito.getInstance();
+    }
 
     public void setProducto(PRODUCTO producto) {
-        this.idProducto = producto.getId();
+        this.producto = producto;
         lblNombre.setText(producto.getNombre());
         lblPrecio.setText(producto.getPrecioFormateado());
-        lblRating.setText(producto.getRatingFormateado());
+        lblRating.setText(String.valueOf(producto.getRating())); 
         imgProducto.setImage(producto.getImagen());
     }
 
-    @FXML
-    private void agregarCarrito() {
-        System.out.println("🛒 Producto agregado al carrito: " + lblNombre.getText());
-        // Aquí puedes agregar lógica real: Carrito.agregar(producto);
+    // Método para pasar la referencia del CATALOGOController
+    public void setCatalogoController(CATALOGOController controller) {
+        this.catalogoController = controller;
     }
 
     @FXML
+    private void agregarAlCarrito() {
+        carrito.agregarProducto(producto);
+        mostrarAlerta("Producto Agregado", producto.getNombre() + " ha sido añadido al carrito.", Alert.AlertType.INFORMATION);
+        
+        // ¡Actualizar el contador del carrito en el CATALOGOController! si, 2 horas para un numerito solo porque se veia bonito (quedo algo feo....)
+        if (catalogoController != null) {
+            catalogoController.actualizarContadorCarrito();
+        }
+    }
+      @FXML 
     private void agregarFavorito() {
-        System.out.println("★ Producto agregado a favoritos: " + lblNombre.getText());
-        // Aquí puedes agregar lógica real: Favoritos.agregar(producto);
+       
+        System.out.println("DEBUG: Se intentó agregar " + producto.getNombre() + " a favoritos.");
+        mostrarAlerta("Producto Favorito", producto.getNombre() + " ha sido añadido a tus favoritos (lógica pendiente).", Alert.AlertType.INFORMATION);
+
+       
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 }
