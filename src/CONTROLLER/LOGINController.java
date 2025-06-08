@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader; 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent; 
-import javafx.scene.Scene; 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality; 
-import javafx.stage.Stage; 
-import MODEL.USUARIO; 
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import MODEL.USUARIO;
 
 public class LOGINController implements Initializable {
 
@@ -29,12 +29,10 @@ public class LOGINController implements Initializable {
     private PasswordField txtContrasena;
 
     @FXML
-    private Label lblCrearCuenta; 
+    private Label lblCrearCuenta;
 
-    
     private static List<USUARIO> usuariosRegistrados = new ArrayList<>();
 
-    
     static {
         usuariosRegistrados.add(new USUARIO("MAT", "1234"));
         usuariosRegistrados.add(new USUARIO("AND", "abc"));
@@ -43,26 +41,52 @@ public class LOGINController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+
     }
 
-@FXML
-private void handleIngresar() {
-    String usuario = txtUsuario.getText();
-    String contrasena = txtContrasena.getText();
+    @FXML
+    private void handleIngresar() {
+        String usuario = txtUsuario.getText();
+        String contrasena = txtContrasena.getText();
 
-    boolean credencialesValidas = false;
-    for (USUARIO user : usuariosRegistrados) {
-        if (user.validar(usuario, contrasena)) {
-            credencialesValidas = true;
-            break;
+        boolean credencialesValidas = false;
+        for (USUARIO user : usuariosRegistrados) {
+            if (user.validar(usuario, contrasena)) {
+                credencialesValidas = true;
+                break;
+            }
         }
-    }
 
         if (credencialesValidas) {
             lblerror.setVisible(false);
-            mostrarAlerta("Éxito", "Inicio de sesión exitoso", Alert.AlertType.INFORMATION);
-            
+
+            try {
+                // Cargar la ventana del catálogo
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/CATALOGO.fxml"));
+                Parent root = loader.load();
+
+                // Obtener el escenario actual (login)
+                Stage loginStage = (Stage) txtUsuario.getScene().getWindow();
+
+                // Crear y configurar la nueva ventana (catálogo)
+                Stage catalogoStage = new Stage();
+                catalogoStage.setTitle("JSHOP - Catálogo de Productos");
+                catalogoStage.setScene(new Scene(root));
+
+                // Configurar para que se muestre maximizada
+                catalogoStage.setMaximized(true); // Esta línea hace la magia
+
+                // Cerrar la ventana de login
+                loginStage.close();
+
+                // Mostrar el catálogo
+                catalogoStage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo cargar el catálogo", Alert.AlertType.ERROR);
+            }
+
         } else {
             lblerror.setVisible(true);
             txtUsuario.clear();
@@ -70,11 +94,11 @@ private void handleIngresar() {
         }
     }
 
-    @FXML 
+    @FXML
     private void irACrearCuenta() {
-        
+
         try {
-           
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/CREARUSUARIO.fxml"));
             Parent root = loader.load();
 
@@ -87,7 +111,7 @@ private void handleIngresar() {
         } catch (IOException e) {
             e.printStackTrace();
             mostrarAlerta("Error al cargar la ventana", "No se pudo cargar la ventana de creación de usuario. Verifique la ruta del FXML y la existencia del archivo. Detalle: " + e.getMessage(), Alert.AlertType.ERROR);
-        } catch (Exception e) { 
+        } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta("Error inesperado", "Ocurrió un error inesperado: " + e.getMessage(), Alert.AlertType.ERROR);
         }

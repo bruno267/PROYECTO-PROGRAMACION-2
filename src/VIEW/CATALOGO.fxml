@@ -3,37 +3,50 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" 
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="CONTROLLER.CATALOGOController"
-            prefWidth="900" prefHeight="600">
+            style="-fx-background-color: #f5f5f5;">
 
-    <!-- Barra superior -->
+    <fx:define>
+        <Insets fx:id="insets" top="20" right="20" bottom="20" left="20"/>
+    </fx:define>
+
+    <!-- BARRA SUPERIOR -->
     <top>
-        <HBox spacing="20" padding="10" style="-fx-background-color: #000000;" alignment="CENTER_LEFT">
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 15;" alignment="CENTER">
             <ImageView fitWidth="40" fitHeight="40">
-                <image>
-                    <Image url="@../IMAGENES/LOGO2.png"/>
-                </image>
+                <Image url="@../IMAGENES/LOGO2.png"/>
             </ImageView>
-            <Label text="JSHOP" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
-            <Region HBox.hgrow="ALWAYS"/> <!-- empuja los botones a la derecha -->
-
-            <!-- Botones funcionales -->
-            <Button text="Favoritos" onAction="#verFavoritos"/>
-            <Button text="Carrito" onAction="#verCarrito"/>
-            <Button text="Mi cuenta" onAction="#verUsuario"/>
-            <Button text="Cerrar sesión" onAction="#cerrarSesion"/>
+            
+            <Label text="JSHOP" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 0 0 0 10;"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button text="🛒 Carrito" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Button text="★ Favoritos" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
+            <Button text="👤 Mi Cuenta" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
         </HBox>
     </top>
 
-    <!-- Panel de tarjetas -->
+    <!-- CONTENIDO PRINCIPAL (PRODUCTOS) -->
     <center>
-        <ScrollPane fitToWidth="true" style="-fx-background-color: #f4f4f4;">
-            <FlowPane fx:id="contenedorProductos"
-                      hgap="20" vgap="20" padding="20"
-                      prefWrapLength="800"
-                      style="-fx-background-color: #f4f4f4;" />
+        <ScrollPane fitToWidth="true" style="-fx-background: #f5f5f5;">
+            <FlowPane fx:id="contenedorProductos" 
+                     hgap="20" vgap="20" 
+                     padding="$insets" 
+                     prefWrapLength="800"/>
         </ScrollPane>
     </center>
+
+    <!-- BARRA INFERIOR -->
+    <bottom>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 10;" alignment="CENTER">
+            <Label text="© 2025 JSHOP - Todos los derechos reservados" style="-fx-text-fill: white;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Cerrar Sesión" style="-fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;"/>
+        </HBox>
+    </bottom>
 </BorderPane>

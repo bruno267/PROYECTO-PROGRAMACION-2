@@ -3,18 +3,13 @@ package CONTROLLER;
 import MODELO.PRODUCTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
 public class CATALOGOController {
 
@@ -22,15 +17,9 @@ public class CATALOGOController {
     private FlowPane contenedorProductos;
 
     @FXML
-    private Label lblPagina;
-
-    private List<PRODUCTO> productos;
-    private final int productosPorPagina = 8;
-
-    @FXML
     public void initialize() {
-        productos = cargarProductos();
-        mostrarProductos();
+        List<PRODUCTO> productos = cargarProductos();
+        mostrarProductos(productos);
     }
 
     private List<PRODUCTO> cargarProductos() {
@@ -63,7 +52,7 @@ public class CATALOGOController {
         return lista;
     }
 
-    private void mostrarProductos() {
+    private void mostrarProductos(List<PRODUCTO> productos) {
         contenedorProductos.getChildren().clear();
 
         for (PRODUCTO producto : productos) {
@@ -76,10 +65,9 @@ public class CATALOGOController {
 
                 contenedorProductos.getChildren().add(tarjeta);
             } catch (IOException e) {
+                System.err.println("Error al cargar la tarjeta de producto: " + e.getMessage());
                 e.printStackTrace();
             }
         }
-
-        lblPagina.setText("Página 1");
     }
 }
