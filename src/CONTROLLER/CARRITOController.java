@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import MODELO.Carrito.NodoCarrito;
 import java.io.IOException;
 
 public class CARRITOController {
@@ -34,22 +34,26 @@ public class CARRITOController {
         actualizarCarrito();
     }
 
-    private void actualizarCarrito() {
+      private void actualizarCarrito() {
         itemsCarrito.getChildren().clear();
         
-        for (PRODUCTO producto : carrito.getProductos()) {
+       
+        NodoCarrito actual = carrito.getCabeza();
+        while (actual != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/ItemCarrito.fxml"));
                 VBox item = loader.load();
                 ItemCarritoController controller = loader.getController();
-                controller.setProducto(producto, this);
+                controller.setProducto(actual.producto, this);
                 itemsCarrito.getChildren().add(item);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            actual = actual.siguiente;
         }
         
-        lblCantidad.setText(String.valueOf(carrito.getProductos().size()));
+        // Usar el contador del carrito
+        lblCantidad.setText(String.valueOf(carrito.getCantidadProductos()));
         lblTotal.setText(String.format("COP$ %.2f", carrito.calcularTotal()));
     }
 

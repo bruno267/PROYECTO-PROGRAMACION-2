@@ -1,13 +1,14 @@
 package MODELO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Carrito {
     private static Carrito instance;
-    private List<PRODUCTO> productos = new ArrayList<>();
+   private NodoCarrito cabeza;
+    private int cantidad;
 
-    private Carrito() {}
+    private Carrito() {
+        cabeza = null;
+        cantidad = 0;
+    }
 
     public static Carrito getInstance() {
         if (instance == null) {
@@ -17,22 +18,71 @@ public class Carrito {
     }
 
     public void agregarProducto(PRODUCTO producto) {
-        productos.add(producto);
+        NodoCarrito nuevoNodo = new NodoCarrito(producto);
+        if (cabeza == null) {
+            cabeza = nuevoNodo;
+        } else {
+            NodoCarrito actual = cabeza;
+            while (actual.siguiente != null) {
+                actual = actual.siguiente;
+            }
+            actual.siguiente = nuevoNodo;
+        }
+        cantidad++;
     }
 
-    public void eliminarProducto(String idProducto) {
-        productos.removeIf(p -> p.getId().equals(idProducto));
-    }
+    public void eliminarProducto(String id) {
+        if (cabeza == null) return;
 
-    public List<PRODUCTO> getProductos() {
-        return productos;
+        if (cabeza.producto.getId().equals(id)) {
+            cabeza = cabeza.siguiente;
+            cantidad--;
+            return;
+        }
+
+        NodoCarrito actual = cabeza;
+        while (actual.siguiente != null) {
+            if (actual.siguiente.producto.getId().equals(id)) {
+                actual.siguiente = actual.siguiente.siguiente;
+                cantidad--;
+                return;
+            }
+            actual = actual.siguiente;
+        }
     }
 
     public double calcularTotal() {
-        return productos.stream().mapToDouble(PRODUCTO::getPrecio).sum();
+        double total = 0;
+        NodoCarrito actual = cabeza;
+        while (actual != null) {
+            total += actual.producto.getPrecio();
+            actual = actual.siguiente;
+        }
+        return total;
     }
 
     public void vaciarCarrito() {
-        productos.clear();
+        cabeza = null;
+        cantidad = 0;
     }
+
+    public int getCantidadProductos() {
+        return cantidad;
+    }
+
+    public NodoCarrito getCabeza() {
+        return cabeza;
+    }
+
+    // Clase interna para nodos del carrito
+ public static class NodoCarrito {
+    public PRODUCTO producto;    
+    public NodoCarrito siguiente; 
+
+    public NodoCarrito(PRODUCTO producto) {
+        this.producto = producto;
+        this.siguiente = null;
+    }
+}
+
 }
