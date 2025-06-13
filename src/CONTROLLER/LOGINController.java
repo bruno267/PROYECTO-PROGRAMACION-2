@@ -1,20 +1,15 @@
 package CONTROLLER;
+
 import MODEL.Navegacion;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import MODEL.USUARIO;
 
@@ -24,12 +19,8 @@ public class LOGINController implements Initializable {
     private Label lblerror;
     @FXML
     private TextField txtUsuario;
-
     @FXML
     private PasswordField txtContrasena;
-
-    @FXML
-    private Label lblCrearCuenta;
 
     private static List<USUARIO> usuariosRegistrados = new ArrayList<>();
 
@@ -41,7 +32,7 @@ public class LOGINController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        // No se requiere inicialización por ahora
     }
 
     @FXML
@@ -49,22 +40,13 @@ public class LOGINController implements Initializable {
         String usuario = txtUsuario.getText();
         String contrasena = txtContrasena.getText();
 
-        boolean credencialesValidas = false;
-        for (USUARIO user : usuariosRegistrados) {
-            if (user.validar(usuario, contrasena)) {
-                credencialesValidas = true;
-                break;
-            }
-        }
+        boolean credencialesValidas = usuariosRegistrados.stream()
+                .anyMatch(user -> user.validar(usuario, contrasena));
 
         if (credencialesValidas) {
             lblerror.setVisible(false);
-
-            {
-                     Stage stage = (Stage) txtUsuario.getScene().getWindow();
-        Navegacion.cambiarVista("/VIEW/CATALOGO.fxml", "JSHOP - Catálogo de Productos", stage);
-    }
-
+            Stage stage = (Stage) txtUsuario.getScene().getWindow();
+            Navegacion.cambiarVista("CATALOGO", "JSHOP - Catálogo de Productos", stage);
         } else {
             lblerror.setVisible(true);
             txtUsuario.clear();
@@ -74,20 +56,12 @@ public class LOGINController implements Initializable {
 
     @FXML
     private void irACrearCuenta() {
-
-       
-
-     
         Stage stage = (Stage) txtUsuario.getScene().getWindow();
-        Navegacion.cambiarVista("/VIEW/REGISTRO.fxml", "JSHOP - Crear Cuenta", stage);
+        // Se corrige el nombre del archivo FXML
+        Navegacion.cambiarVista("CREARUSUARIO", "JSHOP - Crear Cuenta", stage);
     }
 
-    
-
-    // Mé
     public static void agregarUsuario(USUARIO nuevoUsuario) {
         usuariosRegistrados.add(nuevoUsuario);
     }
-
- 
 }
