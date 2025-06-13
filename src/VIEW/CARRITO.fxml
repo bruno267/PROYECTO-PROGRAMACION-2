@@ -21,7 +21,7 @@
             <Region HBox.hgrow="ALWAYS"/>
             
             <Button text="🏠 Catálogo" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#irACatalogo"/>
-            <Button text="★ Favoritos" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
+           <Button text="★ Favoritos" onAction="#irAFavoritos" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
             <Button text="👤 Mi Cuenta" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
         </HBox>
     </top>

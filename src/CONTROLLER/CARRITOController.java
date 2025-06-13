@@ -77,6 +77,11 @@ public class CARRITOController {
      @FXML
     private void irACatalogo() {
         Stage stage = (Stage) itemsCarrito.getScene().getWindow();
-        Navegacion.cambiarVista("/VIEW/CATALOGO.fxml", "JSHOP - Catálogo de Productos", stage);
+        Navegacion.cambiarVista("CATALOGO", "JSHOP - Catálogo de Productos", stage);
     }
+    @FXML
+private void irAFavoritos() {
+    Stage stage = (Stage) itemsCarrito.getScene().getWindow();
+    Navegacion.cambiarVista("FAVORITOS", "JSHOP - Favoritos", stage);
+}
 }

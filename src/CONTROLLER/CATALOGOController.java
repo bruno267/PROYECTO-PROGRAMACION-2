@@ -92,7 +92,7 @@ public class CATALOGOController {
     @FXML
     private void irACarrito() {
         Stage stage = (Stage) contenedorProductos.getScene().getWindow();
-        Navegacion.cambiarVista("/VIEW/CARRITO.fxml", "JSHOP - Carrito de Compras", stage);
+        Navegacion.cambiarVista("CARRITO", "JSHOP - Carrito", stage);
     }
 
     // Método para actualizar el contador del carrito
@@ -111,7 +111,7 @@ public class CATALOGOController {
             currentStage.close();
 
             // Mostrar ventana de login
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/LOGIN.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEWLOGIN.fxml"));
             Parent root = loader.load();
 
             Stage loginStage = new Stage();
@@ -127,4 +127,9 @@ public class CATALOGOController {
             alert.showAndWait();
         }
     }
+   @FXML
+private void irAFavoritos() {
+    Stage stage = (Stage) contenedorProductos.getScene().getWindow();
+    Navegacion.cambiarVista("FAVORITOS", "JSHOP - Favoritos", stage);
+}
 }

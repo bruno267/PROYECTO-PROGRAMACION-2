@@ -32,7 +32,7 @@ public class LOGINController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // No se requiere inicialización por ahora
+       
     }
 
     @FXML
@@ -56,9 +56,9 @@ public class LOGINController implements Initializable {
 
     @FXML
     private void irACrearCuenta() {
+       
         Stage stage = (Stage) txtUsuario.getScene().getWindow();
-        // Se corrige el nombre del archivo FXML
-        Navegacion.cambiarVista("CREARUSUARIO", "JSHOP - Crear Cuenta", stage);
+        Navegacion.cargarVista("CREARUSUARIO", "JSHOP - Crear Nueva Cuenta");
     }
 
     public static void agregarUsuario(USUARIO nuevoUsuario) {

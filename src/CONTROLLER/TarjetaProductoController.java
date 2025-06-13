@@ -2,6 +2,7 @@ package CONTROLLER;
 
 import MODELO.PRODUCTO;
 import MODELO.Carrito; 
+import MODELO.Favoritos;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,14 +53,15 @@ public class TarjetaProductoController {
             catalogoController.actualizarContadorCarrito();
         }
     }
-      @FXML 
-    private void agregarFavorito() {
-       
-        System.out.println("DEBUG: Se intentó agregar " + producto.getNombre() + " a favoritos.");
-        mostrarAlerta("Producto Favorito", producto.getNombre() + " ha sido añadido a tus favoritos (lógica pendiente).", Alert.AlertType.INFORMATION);
-
-       
-    }
+    @FXML 
+private void agregarFavorito() {
+    Favoritos favoritos = Favoritos.getInstance();
+    favoritos.agregarProducto(producto);
+    
+    mostrarAlerta("Producto Favorito", 
+                  producto.getNombre() + " ha sido añadido a tus favoritos.", 
+                  Alert.AlertType.INFORMATION);
+}
 
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
