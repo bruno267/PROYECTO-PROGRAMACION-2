@@ -1,4 +1,4 @@
-package MODELO;
+package MODEL;
 
 public class Carrito {
     private static Carrito instance;

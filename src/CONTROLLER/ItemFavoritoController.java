@@ -1,8 +1,8 @@
 // ItemFavoritoController.java
 package CONTROLLER;
 
-import MODELO.Carrito;
-import MODELO.PRODUCTO;
+import MODEL.Carrito;
+import MODEL.PRODUCTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

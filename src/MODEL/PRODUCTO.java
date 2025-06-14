@@ -1,4 +1,4 @@
-package MODELO;
+package MODEL;
 
 import javafx.scene.image.Image;
 

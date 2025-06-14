@@ -1,6 +1,6 @@
 package CONTROLLER;
 
-import MODELO.PRODUCTO;
+import MODEL.PRODUCTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

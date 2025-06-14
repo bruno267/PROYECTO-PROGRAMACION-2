@@ -1,0 +1,9 @@
+===== FACTURA JSHOP =====
+Tienda: JSHOP
+Usuario: AND
+
+Productos:
+- Audífonos Bluetooth STAU | Precio: $90900.0
+
+Total: $90900,00
+==========================

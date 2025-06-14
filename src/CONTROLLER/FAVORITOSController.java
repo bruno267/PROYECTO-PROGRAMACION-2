@@ -2,8 +2,8 @@
 package CONTROLLER;
 
 import MODEL.Navegacion;
-import MODELO.Favoritos;
-import MODELO.PRODUCTO;
+import MODEL.Favoritos;
+import MODEL.PRODUCTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -61,4 +61,11 @@ public class FAVORITOSController {
         Stage stage = (Stage) contenedorFavoritos.getScene().getWindow();
         Navegacion.cambiarVista("CARRITO", "JSHOP - Carrito", stage);
     }
+    
+    @FXML
+private void cerrarSesion() {
+    Stage stage = (Stage) contenedorFavoritos.getScene().getWindow();
+    stage.close();
+    Navegacion.cargarVista("LOGIN", "JSHOP - Inicio de Sesión");
+}
 }

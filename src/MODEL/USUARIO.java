@@ -12,11 +12,11 @@ import com.sun.glass.events.WindowEvent;
  */
 public class USUARIO {
     private String username;
-    private String pasword;
+    private String password;
 
     public USUARIO(String username, String pasword) {
         this.username = username;
-        this.pasword = pasword;
+        this.password = pasword;
     }
 
     public String getUsername() {
@@ -27,14 +27,14 @@ public class USUARIO {
         this.username = username;
     }
 
-    public String getPasword() {
-        return pasword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPassword(String password) {
+        this.password = password;
     }
     public boolean validar(String user, String contra){
-        return this.username.equals(user)&& this.pasword.equals(contra);
+        return this.username.equals(user)&& this.password.equals(contra);
     }
 }

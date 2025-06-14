@@ -1,8 +1,8 @@
 package CONTROLLER;
 
 import MODEL.Navegacion;
-import MODELO.PRODUCTO;
-import MODELO.Carrito;
+import MODEL.PRODUCTO;
+import MODEL.Carrito;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -10,8 +10,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import MODELO.ListaProducto;
-import MODELO.NodoProducto;
+import MODEL.ListaProducto;
+import MODEL.NodoProducto;
 
 import java.io.IOException;
 import javafx.scene.Parent;
@@ -105,31 +105,14 @@ public class CATALOGOController {
 
     @FXML
     private void cerrarSesion() {
-        try {
-            // Cerrar ventana actual
-            Stage currentStage = (Stage) contenedorProductos.getScene().getWindow();
-            currentStage.close();
-
-            // Mostrar ventana de login
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEWLOGIN.fxml"));
-            Parent root = loader.load();
-
-            Stage loginStage = new Stage();
-            loginStage.setTitle("JSHOP - Inicio de Sesión");
-            loginStage.setScene(new Scene(root));
-            loginStage.show();
-
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No se pudo cargar la pantalla de login");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
+        Stage currentStage = (Stage) contenedorProductos.getScene().getWindow();
+        currentStage.close();
+        Navegacion.cargarVista("LOGIN", "JSHOP - Inicio de Sesión");
     }
-   @FXML
-private void irAFavoritos() {
-    Stage stage = (Stage) contenedorProductos.getScene().getWindow();
-    Navegacion.cambiarVista("FAVORITOS", "JSHOP - Favoritos", stage);
-}
+
+    @FXML
+    private void irAFavoritos() {
+        Stage stage = (Stage) contenedorProductos.getScene().getWindow();
+        Navegacion.cambiarVista("FAVORITOS", "JSHOP - Favoritos", stage);
+    }
 }

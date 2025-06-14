@@ -1,4 +1,4 @@
-package MODELO;
+package MODEL;
 
 public class ListaProducto {
     private NodoProducto cabeza;

@@ -1,42 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="CONTROLLER.FAVORITOSController" style="-fx-background-color: #f5f5f5;">
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="CONTROLLER.FAVORITOSController"
+            style="-fx-background-color: #f2f2f2;">
 
+    <!-- BARRA SUPERIOR -->
     <top>
-        <VBox style="-fx-background-color: #2c3e50; -fx-padding: 15;" alignment="CENTER">
+        <HBox style="-fx-background-color: #1a1a1a; -fx-padding: 15;" alignment="CENTER">
             <ImageView fitWidth="40" fitHeight="40">
                 <Image url="@../IMAGENES/LOGO2.png"/>
             </ImageView>
-            
-            <Label text="JSHOP" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 0 0 0 10;"/>
-            
+
+            <Label text="JSHOP"
+                   style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 0 0 0 10;"/>
+
             <Region HBox.hgrow="ALWAYS"/>
-            
-            <Button text="🏠 Catálogo" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#irACatalogo"/>
-            <Button text="🛒 Carrito" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#irACarrito"/>
-            <Button text="👤 Mi Cuenta" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
-        </VBox>
+
+            <Button text="🏠 Catálogo" onAction="#irACatalogo"
+                    style="-fx-background-color: #333333; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
+
+            <Button text="🛒 Carrito" onAction="#irACarrito"
+                    style="-fx-background-color: #4d4d4d; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
+
+            <Button text="👤 Mi Cuenta"
+                    style="-fx-background-color: #666666; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15;"/>
+        </HBox>
     </top>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <center>
-        <VBox style="-fx-padding: 20;" alignment="TOP_CENTER">
-            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 15;" prefWidth="700">
-                <Label text="MIS FAVORITOS" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;"/>
+        <HBox alignment="CENTER" style="-fx-padding: 20;">
+            <VBox spacing="15"
+                  style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;"
+                  prefWidth="700">
+                <Label text="MIS FAVORITOS"
+                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;"/>
                 <VBox fx:id="contenedorFavoritos" spacing="15"/>
             </VBox>
-        </VBox>
+        </HBox>
     </center>
 
+    <!-- BARRA INFERIOR -->
     <bottom>
-        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 10;" alignment="CENTER">
+        <HBox style="-fx-background-color: #1a1a1a; -fx-padding: 10;" alignment="CENTER">
             <Label text="© 2025 JSHOP - Todos los derechos reservados" style="-fx-text-fill: white;"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Cerrar Sesión" style="-fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;"/>
+            <Button text="Cerrar Sesión"
+                    onAction="#cerrarSesion"
+                    style="-fx-text-fill: white; -fx-background-color: transparent;
+                           -fx-border-color: white; -fx-border-radius: 5; -fx-padding: 5 10;"/>
         </HBox>
     </bottom>
 </BorderPane>

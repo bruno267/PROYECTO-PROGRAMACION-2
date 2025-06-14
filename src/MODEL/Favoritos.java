@@ -1,5 +1,5 @@
 
-package MODELO;
+package MODEL;
 
 public class Favoritos {
     private static Favoritos instance;

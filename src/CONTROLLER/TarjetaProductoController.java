@@ -1,8 +1,8 @@
 package CONTROLLER;
 
-import MODELO.PRODUCTO;
-import MODELO.Carrito; 
-import MODELO.Favoritos;
+import MODEL.PRODUCTO;
+import MODEL.Carrito; 
+import MODEL.Favoritos;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
