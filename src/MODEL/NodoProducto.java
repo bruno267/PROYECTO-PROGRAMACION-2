@@ -1,6 +1,7 @@
 package MODEL;
 
 public class NodoProducto {
+
     private PRODUCTO producto;
     private NodoProducto siguiente;
 

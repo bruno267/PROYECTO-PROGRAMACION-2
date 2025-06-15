@@ -26,7 +26,7 @@ public class ItemCarritoController {
     public void setProducto(PRODUCTO producto, CARRITOController carritoController) {
         this.producto = producto;
         this.carritoController = carritoController;
-        
+
         lblNombre.setText(producto.getNombre());
         lblPrecio.setText(producto.getPrecioFormateado());
         imgProducto.setImage(producto.getImagen());

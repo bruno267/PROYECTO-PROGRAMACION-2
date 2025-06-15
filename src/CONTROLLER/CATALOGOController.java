@@ -62,7 +62,14 @@ public class CATALOGOController {
         lista.agregar(new PRODUCTO("P008", "Nokia 105 4G", 98700, 4.7,
                 new Image(getClass().getResourceAsStream("/IMAGENES/nokia.png"))));
 
+        lista.agregar(new PRODUCTO("P009", "Control PLAYSTATION PS5", 254900, 4.9,
+                new Image(getClass().getResourceAsStream("/IMAGENES/Control.png"))));
+
+        lista.agregar(new PRODUCTO("P010", "Portátil LENOVO IdeaPad", 2399000, 4.7,
+                new Image(getClass().getResourceAsStream("/IMAGENES/Lenovo.png"))));
+
         return lista;
+
     }
 
     private void mostrarProductos(ListaProducto lista) {
@@ -115,4 +122,11 @@ public class CATALOGOController {
         Stage stage = (Stage) contenedorProductos.getScene().getWindow();
         Navegacion.cambiarVista("FAVORITOS", "JSHOP - Favoritos", stage);
     }
+
+    @FXML
+    private void irAMiCuenta() {
+        Stage stage = (Stage) contenedorProductos.getScene().getWindow();
+        Navegacion.cambiarVista("MICUENTA", "JSHOP - Mi Cuenta", stage);
+    }
+
 }

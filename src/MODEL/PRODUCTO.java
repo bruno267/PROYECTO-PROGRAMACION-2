@@ -3,6 +3,7 @@ package MODEL;
 import javafx.scene.image.Image;
 
 public class PRODUCTO {
+
     private String id;
     private String nombre;
     private double precio;

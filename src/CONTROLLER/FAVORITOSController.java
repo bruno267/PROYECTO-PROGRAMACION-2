@@ -1,4 +1,3 @@
-
 package CONTROLLER;
 
 import MODEL.Navegacion;
@@ -28,15 +27,15 @@ public class FAVORITOSController {
     private void mostrarFavoritos() {
         contenedorFavoritos.getChildren().clear();
         Favoritos.NodoFavorito actual = favoritos.getCabeza();
-        
+
         while (actual != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/VIEW/ItemFavoritos.fxml"));
-               Parent item = loader.load();
-                
+                Parent item = loader.load();
+
                 ItemFavoritoController controller = loader.getController();
                 controller.setProducto(actual.producto, this);
-                
+
                 contenedorFavoritos.getChildren().add(item);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -61,11 +60,17 @@ public class FAVORITOSController {
         Stage stage = (Stage) contenedorFavoritos.getScene().getWindow();
         Navegacion.cambiarVista("CARRITO", "JSHOP - Carrito", stage);
     }
-    
+
     @FXML
-private void cerrarSesion() {
-    Stage stage = (Stage) contenedorFavoritos.getScene().getWindow();
-    stage.close();
-    Navegacion.cargarVista("LOGIN", "JSHOP - Inicio de Sesión");
-}
+    private void irAMiCuenta() {
+        Stage stage = (Stage) contenedorFavoritos.getScene().getWindow();
+        Navegacion.cambiarVista("MICUENTA", "JSHOP - Mi Cuenta", stage);
+    }
+
+    @FXML
+    private void cerrarSesion() {
+        Stage stage = (Stage) contenedorFavoritos.getScene().getWindow();
+        stage.close();
+        Navegacion.cargarVista("LOGIN", "JSHOP - Inicio de Sesión");
+    }
 }

@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import MODEL.USUARIO;
 
-public class CREARUSUARIOController implements Initializable { 
+public class CREARUSUARIOController implements Initializable {
 
     @FXML
     private TextField txtNuevoUsuario;
@@ -58,7 +58,6 @@ public class CREARUSUARIOController implements Initializable {
         lblMensajeRegistro.setText("¡Usuario '" + nuevoUsuario + "' creado con éxito!");
         lblMensajeRegistro.setVisible(true);
 
-       
         Stage stage = (Stage) txtNuevoUsuario.getScene().getWindow();
         stage.close();
     }

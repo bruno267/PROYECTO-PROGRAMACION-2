@@ -10,11 +10,11 @@
     <VBox alignment="CENTER" spacing="8" layoutX="10" layoutY="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
         <ImageView fx:id="imgProducto" fitWidth="100" fitHeight="100" />
         <Label fx:id="lblNombre" style="-fx-font-weight: bold;" wrapText="true"/>
-        <Label fx:id="lblPrecio" style="-fx-text-fill: gray;" />
+        <Label fx:id="lblPrecio" style="-fx-text-fill: #444444; -fx-font-size: 14px; -fx-font-weight: bold;" />
         
         <HBox spacing="10" alignment="CENTER">
             <Label fx:id="lblRating" text="★ 4.9" />
-          <Button fx:id="btnAgregarCarrito" text="🛒" onAction="#agregarAlCarrito"/>
+            <Button fx:id="btnAgregarCarrito" text="🛒" onAction="#agregarAlCarrito"/>
             <Button fx:id="btnFavorito" text="☆" onAction="#agregarFavorito" />
         </HBox>
     </VBox>

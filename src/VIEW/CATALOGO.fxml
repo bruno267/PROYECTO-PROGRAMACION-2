@@ -39,9 +39,10 @@
                     style="-fx-background-color: #4d4d4d; -fx-text-fill: white; -fx-font-weight: bold;
                            -fx-background-radius: 5; -fx-padding: 5 10;"/>
 
-            <Button text="👤 Mi Cuenta"
+            <Button text="👤 Mi Cuenta" onAction="#irAMiCuenta"
                     style="-fx-background-color: #666666; -fx-text-fill: white; -fx-font-weight: bold;
-                           -fx-background-radius: 5; -fx-padding: 5 10;"/>
+               -fx-background-radius: 5; -fx-padding: 5 10;"/>
+
         </HBox>
     </top>
 

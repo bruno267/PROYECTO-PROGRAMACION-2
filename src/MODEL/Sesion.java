@@ -1,6 +1,7 @@
 package MODEL;
 
 public class Sesion {
+
     private static USUARIO usuarioActual;
 
     public static void setUsuario(USUARIO usuario) {
