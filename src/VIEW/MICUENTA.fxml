@@ -33,39 +33,54 @@
 
     <!-- CONTENIDO PRINCIPAL -->
     <center>
-        <HBox alignment="CENTER" style="-fx-padding: 20;">
+        <HBox spacing="40" alignment="CENTER" style="-fx-padding: 40;">
+        
+            <!-- COLUMNA IZQUIERDA: Datos del usuario -->
             <VBox spacing="20"
-                  style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;"
-                  prefWidth="700">
+                  style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 30;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);"
+                  prefWidth="300"
+                  alignment="TOP_CENTER">
 
-                <Label text="👤 MI CUENTA"
-                       style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-padding: 0 0 10 0;"/>
+                <ImageView fitWidth="100" fitHeight="100">
+                    <Image url="@../IMAGENES/usuario_default.png"/>
+                </ImageView>
 
-                <TitledPane text="Información del Usuario" expanded="true">
-                    <content>
-                        <VBox spacing="10" style="-fx-padding: 10;">
-                            <HBox spacing="10" alignment="CENTER_LEFT">
-                                <Label text="👤" style="-fx-font-size: 16px;"/>
-                                <Label fx:id="lblUsername" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-                            </HBox>
-                            <HBox spacing="10" alignment="CENTER_LEFT">
-                                <Label text="📅" style="-fx-font-size: 16px;"/>
-                                <Label fx:id="lblFechaRegistro" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-                            </HBox>
-                        </VBox>
-                    </content>
-                </TitledPane>
+                <Label fx:id="lblUsername"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" />
 
-                <TitledPane text="Historial de Compras" expanded="true">
-                    <content>
-                        <ListView fx:id="listaHistorial"
-                                  style="-fx-background-radius: 5; -fx-border-color: #ccc; -fx-border-radius: 5;"/>
-                    </content>
-                </TitledPane>
-
+                <VBox spacing="10" alignment="CENTER_LEFT">
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="📅 Fecha de Registro:" style="-fx-font-size: 13px; -fx-text-fill: #666;" />
+                        <Label fx:id="lblFechaRegistro" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="📧 Correo:" style="-fx-font-size: 13px; -fx-text-fill: #666;" />
+                        <Label fx:id="lblCorreo" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                    </HBox>
+                </VBox>
             </VBox>
+
+            <!-- COLUMNA DERECHA: Historial -->
+            <VBox spacing="10" alignment="TOP_LEFT"
+                  style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 20;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 6, 0.3, 0, 1);"
+                  prefWidth="500" VBox.vgrow="ALWAYS">
+
+                <Label text="🧾 Historial de Compras"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
+                <ListView fx:id="listaHistorial"
+                          style="-fx-background-radius: 5; -fx-border-color: #ccc; -fx-border-radius: 5;"
+                          VBox.vgrow="ALWAYS"
+                          prefHeight="400"
+                          maxWidth="Infinity"/>
+            </VBox>
+
         </HBox>
     </center>
+
+
 
     <!-- BARRA INFERIOR -->
     <bottom>

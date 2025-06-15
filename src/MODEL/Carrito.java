@@ -2,11 +2,13 @@ package MODEL;
 
 public class Carrito {
     private static Carrito instance;
-   private NodoCarrito cabeza;
+    private NodoCarrito cabeza;
+    private NodoCarrito cola;  // 
     private int cantidad;
 
     private Carrito() {
         cabeza = null;
+        cola = null;
         cantidad = 0;
     }
 
@@ -21,12 +23,10 @@ public class Carrito {
         NodoCarrito nuevoNodo = new NodoCarrito(producto);
         if (cabeza == null) {
             cabeza = nuevoNodo;
+            cola = nuevoNodo;
         } else {
-            NodoCarrito actual = cabeza;
-            while (actual.siguiente != null) {
-                actual = actual.siguiente;
-            }
-            actual.siguiente = nuevoNodo;
+            cola.siguiente = nuevoNodo;
+            cola = nuevoNodo;
         }
         cantidad++;
     }
@@ -36,6 +36,7 @@ public class Carrito {
 
         if (cabeza.producto.getId().equals(id)) {
             cabeza = cabeza.siguiente;
+            if (cabeza == null) cola = null;  // actualiza cola si quedó vacía
             cantidad--;
             return;
         }
@@ -43,6 +44,9 @@ public class Carrito {
         NodoCarrito actual = cabeza;
         while (actual.siguiente != null) {
             if (actual.siguiente.producto.getId().equals(id)) {
+                if (actual.siguiente == cola) {
+                    cola = actual;  // actualiza cola si se borra el último
+                }
                 actual.siguiente = actual.siguiente.siguiente;
                 cantidad--;
                 return;
@@ -63,6 +67,7 @@ public class Carrito {
 
     public void vaciarCarrito() {
         cabeza = null;
+        cola = null;
         cantidad = 0;
     }
 
@@ -75,14 +80,13 @@ public class Carrito {
     }
 
     // Clase interna para nodos del carrito
- public static class NodoCarrito {
-    public PRODUCTO producto;    
-    public NodoCarrito siguiente; 
+    public static class NodoCarrito {
+        public PRODUCTO producto;
+        public NodoCarrito siguiente;
 
-    public NodoCarrito(PRODUCTO producto) {
-        this.producto = producto;
-        this.siguiente = null;
+        public NodoCarrito(PRODUCTO producto) {
+            this.producto = producto;
+            this.siguiente = null;
+        }
     }
-}
-
 }

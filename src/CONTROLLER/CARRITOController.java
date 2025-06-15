@@ -5,20 +5,14 @@ import MODEL.Sesion;
 import MODEL.USUARIO;
 import MODEL.Carrito;
 import MODEL.PRODUCTO;
+import MODEL.ListaProducto;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import MODEL.Carrito.NodoCarrito;
+import MODEL.Compra;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -32,7 +26,7 @@ public class CARRITOController {
     @FXML
     private Label lblTotal;
     @FXML
-    private VBox resumenDetalle; // NUEVO: Contenedor para productos del resumen
+    private VBox resumenDetalle;
 
     private Carrito carrito;
 
@@ -44,7 +38,7 @@ public class CARRITOController {
 
     private void actualizarCarrito() {
         itemsCarrito.getChildren().clear();
-        resumenDetalle.getChildren().clear(); // Limpiar el resumen también
+        resumenDetalle.getChildren().clear();
 
         NodoCarrito actual = carrito.getCabeza();
         while (actual != null) {
@@ -55,7 +49,6 @@ public class CARRITOController {
                 controller.setProducto(actual.producto, this);
                 itemsCarrito.getChildren().add(item);
 
-                // Agregar al resumen
                 Label resumenItem = new Label(actual.producto.getNombre() + " - $" + actual.producto.getPrecio());
                 resumenItem.setStyle("-fx-font-size: 12px;");
                 resumenDetalle.getChildren().add(resumenItem);
@@ -78,51 +71,41 @@ public class CARRITOController {
     private void realizarCompra() {
         USUARIO usuario = Sesion.getUsuario();
         if (usuario == null) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("Usuario no identificado");
-            alerta.setContentText("No se ha iniciado sesión.");
-            alerta.show();
+            new Alert(Alert.AlertType.WARNING, "No se ha iniciado sesión.").show();
             return;
         }
 
         StringBuilder factura = new StringBuilder();
-        factura.append("===== FACTURA JSHOP =====\n");
-        factura.append("Tienda: JSHOP\n");
-        factura.append("Usuario: ").append(usuario.getUsername()).append("\n\n");
-        factura.append("Productos:\n");
-
-        Carrito carrito = Carrito.getInstance();
         NodoCarrito actual = carrito.getCabeza();
+        String fechaCompra = java.time.LocalDate.now().toString();
 
         while (actual != null) {
             PRODUCTO p = actual.producto;
-            factura.append("- ").append(p.getNombre()).append(" | Precio: $")
-                    .append(p.getPrecio()).append("\n");
+
+            // Agrega una nueva compra al historial con fecha
+            Sesion.agregarCompra(new Compra(p, java.time.LocalDate.now()));
+
+            factura.append(p.getId()).append(";")
+                    .append(p.getNombre()).append(";")
+                    .append(p.getPrecio()).append(";")
+                    .append(p.getRating()).append(";")
+                    .append(p.getImagen().getUrl()).append(";")
+                    .append(fechaCompra).append("\n");
+
             actual = actual.siguiente;
         }
 
-        factura.append("\nTotal: $").append(String.format("%.2f", carrito.calcularTotal())).append("\n");
-        factura.append("==========================");
-
-        // Guardar factura como archivo .txt en carpeta del usuario
         String nombreArchivo = "factura_" + usuario.getUsername() + ".txt";
         String rutaCompleta = System.getProperty("user.home") + java.io.File.separator + nombreArchivo;
 
         try {
             Files.write(Paths.get(rutaCompleta), factura.toString().getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
-            Alert errorArchivo = new Alert(Alert.AlertType.ERROR);
-            errorArchivo.setTitle("Error al guardar");
-            errorArchivo.setHeaderText("No se pudo guardar la factura");
-            errorArchivo.setContentText(e.getMessage());
-            errorArchivo.show();
+            new Alert(Alert.AlertType.ERROR, "Error al guardar factura: " + e.getMessage()).show();
             return;
         }
 
-        // Mostrar factura y ubicación del archivo
-        TextArea areaFactura = new TextArea(factura.toString() + "\n\nGuardado en: " + rutaCompleta);
+        TextArea areaFactura = new TextArea("=== Factura generada ===\n\n" + factura + "\nGuardado en: " + rutaCompleta);
         areaFactura.setEditable(false);
         areaFactura.setWrapText(true);
         areaFactura.setPrefWidth(450);
